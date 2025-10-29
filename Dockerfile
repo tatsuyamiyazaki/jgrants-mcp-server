@@ -27,12 +27,12 @@ ENV JGRANTS_FILES_DIR=/app/jgrants_files \
     API_BASE_URL=https://api.jgrants-portal.go.jp/exp/v1/public \
     PYTHONUNBUFFERED=1
 
-# ポート8000を公開
-EXPOSE 8000
+# ポート8080を公開
+EXPOSE 8080
 
 # ヘルスチェック
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD python -c "import httpx; httpx.get('http://localhost:8000/mcp')" || exit 1
+    CMD python -c "import httpx; httpx.get('http://localhost:8080/mcp')" || exit 1
 
 # サーバー起動コマンド
-CMD ["python", "-m", "jgrants_mcp_server.core", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "jgrants_mcp_server.core", "--host", "0.0.0.0", "--port", "8080"]
