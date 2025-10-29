@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  jgrants-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jgrants-mcp-server
+    ports:
+      - "8000:8000"
+    environment:
+      - JGRANTS_FILES_DIR=/app/jgrants_files
+      - API_BASE_URL=https://api.jgrants-portal.go.jp/exp/v1/public
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - jgrants_files:/app/jgrants_files
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/mcp')"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+volumes:
+  jgrants_files:
+    driver: local
