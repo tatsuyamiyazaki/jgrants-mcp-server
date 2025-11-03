@@ -1,0 +1,41 @@
+{
+  "name": "jgrants-mcp-server",
+  "version": "0.1.0",
+  "description": "Jグランツ（jGrants）補助金情報のModel Context Protocol (MCP) サーバー - Node.js版",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "jgrants-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "node --test tests/test_core.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "jgrants",
+    "subsidy",
+    "補助金"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "axios": "^1.7.9",
+    "csv-stringify": "^6.5.3",
+    "dotenv": "^16.4.7",
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pdf-parse": "^1.1.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
