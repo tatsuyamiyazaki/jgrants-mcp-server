@@ -43,7 +43,7 @@ function getHttpClient(): AxiosInstance {
     httpClient = axios.create({
       timeout: 30000,
       headers: {
-        'User-Agent': 'jgrants-mcp-server/0.1 (+https://github.com/yourusername/jgrants-mcp-server)',
+        'User-Agent': 'jgrants-mcp-server/0.1 (+https://github.com/tatsuyamiyazaki/jgrants-mcp-server)',
       },
       maxRedirects: 5,
     });
@@ -171,7 +171,7 @@ async function ping(): Promise<any> {
   return {
     status: 'ok',
     server: 'jGrants MCP Server',
-    version: '2.0.0',
+    version: '0.1.0',
     timestamp: new Date().toISOString(),
   };
 }
