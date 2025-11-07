@@ -24,6 +24,7 @@ import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import * as XLSX from 'xlsx';
 import { stringify } from 'csv-stringify/sync';
+import * as http from 'http';
 
 // Load environment variables
 dotenv.config();
@@ -888,6 +889,17 @@ async function main() {
   await server.connect(transport);
   console.error('jGrants MCP Server running on stdio');
 }
+
+// Minimal HTTP server so platforms like Cloud Run detect healthy container
+const PORT = Number(process.env.PORT) || 8080;
+const healthServer = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('jGrants MCP server ready');
+});
+
+healthServer.listen(PORT, () => {
+  console.error(`Health check server listening on port ${PORT}`);
+});
 
 main().catch((error) => {
   console.error('Fatal error:', error);
